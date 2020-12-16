@@ -3,7 +3,7 @@ import MenuItem from '../MenuItem/MenuItem';
 import './Directory.scss';
 
 const Directory = () => {
-    const [sections, setSections] = useState([
+    const [ sections ] = useState([
         {
           title: 'hats',
           imageUrl: 'https://i.ibb.co/cvpntL1/hats.png',
@@ -40,7 +40,7 @@ const Directory = () => {
     return (
         <div className="directory-menu">
             { sections.map(({ id, ...otherMenuItemProps}) => {
-                return <MenuItem id={id} {...otherMenuItemProps} />
+                return <MenuItem key={id} {...otherMenuItemProps} />
             }) }
         </div>
     );
