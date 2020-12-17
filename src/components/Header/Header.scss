@@ -9,7 +9,9 @@
   .logo-container {
     height: 100%;
     width: 70px;
-    padding: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .options {
@@ -21,6 +23,8 @@
 
     .option {
       padding: 10px 15px;
+      font-size: 1.2rem;
+      cursor: pointer;
     }
   }
 }
