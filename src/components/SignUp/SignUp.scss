@@ -1,0 +1,15 @@
+.sign-up {
+    display: flex;
+    flex-direction: column;
+    width: 380px;
+
+    .title {
+        margin: 10px 0;
+    }
+}
+
+.error {
+    color: red;
+    margin: 5px;
+    text-align: center;
+}

@@ -6,7 +6,7 @@ import HatsPage from './HatsPage/HatsPage';
 import ShopPage from './ShopPage/ShopPage';
 import SignInAndSignUpPage from './SignIn-and-SignUp-Page/SignIn-and-SignUp-Page';
 import { Switch, Route } from 'react-router-dom';
-import { auth } from '../firebase/firebase.utils';
+import { auth, createUserProfileDocument } from '../firebase/firebase.utils';
 
 function App() {
   const [ currentUser, setCurrentUser ] = useState(null);
@@ -14,13 +14,22 @@ function App() {
   const unsubscribeFromAuth = useRef(null);
 
   useEffect(() => {
-    unsubscribeFromAuth.current = auth.onAuthStateChanged((user) => {
-      setCurrentUser(user);
-      console.log(user);
-    });
+    unsubscribeFromAuth.current = auth.onAuthStateChanged(async (userAuth) => {
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth);
 
+        userRef.onSnapshot((snapShot) => {
+          setCurrentUser({
+            id: snapShot.id,
+            ...snapShot.data()
+          });
+        });
+      } else {
+        setCurrentUser(userAuth);
+      }
+    });
     return unsubscribeFromAuth.current;
-  });
+  }, []);
 
   return (
     <div className="App">
