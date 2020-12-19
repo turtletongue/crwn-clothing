@@ -1,17 +1,9 @@
 import './SignUp.scss';
-import { useState } from 'react';
 import FormInput from '../FormInput/FormInput';
 import CustomButton from '../CustomButton/CustomButton';
 import { auth, createUserProfileDocument } from '../../firebase/firebase.utils';
 
-const SignUp = () => {
-    const [ registerState, setRegisterState ] = useState({
-        displayName: '',
-        email: '',
-        password: '',
-        confirmPassword: '',
-        isCorrect: true
-    });
+const SignUp = ({ registerState, setRegisterState }) => {
 
     const { displayName, email, password, confirmPassword, isCorrect } = registerState;
 
@@ -57,7 +49,7 @@ const SignUp = () => {
                     <CustomButton type="submit">SIGN UP</CustomButton>
                     {
                         (!isCorrect) ?
-                        <span className="error">Incorrect email or password.</span>
+                        <span className="error">Passwords do not match.</span>
                         :
                         <></>
                     }

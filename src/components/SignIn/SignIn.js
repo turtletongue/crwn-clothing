@@ -1,15 +1,9 @@
 import './SignIn.scss';
-import { useState } from 'react';
 import FormInput from '../FormInput/FormInput';
 import CustomButton from '../CustomButton/CustomButton';
 import { auth, signInWithGoogle } from '../../firebase/firebase.utils';
 
-const SignIn = () => {
-    const [ signState, setSignState ] = useState({
-        email: '',
-        password: '',
-        isCorrect: true
-    });
+const SignIn = ({ signState, setSignState }) => {
 
     const { email, password, isCorrect } = signState;
 

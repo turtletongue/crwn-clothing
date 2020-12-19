@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import './App.css';
 import Header from '../components/Header/Header';
 import Homepage from './Homepage/Homepage';
@@ -7,9 +7,16 @@ import ShopPage from './ShopPage/ShopPage';
 import SignInAndSignUpPage from './SignIn-and-SignUp-Page/SignIn-and-SignUp-Page';
 import { Switch, Route } from 'react-router-dom';
 import { auth, createUserProfileDocument } from '../firebase/firebase.utils';
+import { connect } from 'react-redux';
+import { setCurrentUser } from '../redux/user/userActions';
 
-function App() {
-  const [ currentUser, setCurrentUser ] = useState(null);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setUser: (user) => dispatch(setCurrentUser(user))
+  };
+}
+
+const App = ({ setUser }) => {
 
   const unsubscribeFromAuth = useRef(null);
 
@@ -19,21 +26,21 @@ function App() {
         const userRef = await createUserProfileDocument(userAuth);
 
         userRef.onSnapshot((snapShot) => {
-          setCurrentUser({
+          setUser({
             id: snapShot.id,
             ...snapShot.data()
           });
         });
       } else {
-        setCurrentUser(userAuth);
+        setUser(userAuth);
       }
     });
     return unsubscribeFromAuth.current;
-  }, []);
+  }, [setUser]);
 
   return (
     <div className="App">
-      <Header currentUser={currentUser} />
+      <Header />
       <Switch>
         <Route path="/" exact component={Homepage} />
         <Route path="/hats" exact component={HatsPage} />
@@ -44,4 +51,4 @@ function App() {
   );
 }
 
-export default App;
+export default connect(null, mapDispatchToProps)(App);
