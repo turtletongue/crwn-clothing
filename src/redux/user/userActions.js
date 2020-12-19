@@ -1,4 +1,4 @@
-import {  SET_CURRENT_USER } from '../constants';
+import {  SET_CURRENT_USER } from '../action-types';
 
 export const setCurrentUser = (user) => {
     return {

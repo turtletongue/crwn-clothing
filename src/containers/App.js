@@ -5,10 +5,16 @@ import Homepage from './Homepage/Homepage';
 import HatsPage from './HatsPage/HatsPage';
 import ShopPage from './ShopPage/ShopPage';
 import SignInAndSignUpPage from './SignIn-and-SignUp-Page/SignIn-and-SignUp-Page';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import { auth, createUserProfileDocument } from '../firebase/firebase.utils';
 import { connect } from 'react-redux';
 import { setCurrentUser } from '../redux/user/userActions';
+
+const mapStateToProps = (state) => {
+  return {
+    currentUser: state.user.currentUser
+  }
+}
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -16,7 +22,7 @@ const mapDispatchToProps = (dispatch) => {
   };
 }
 
-const App = ({ setUser }) => {
+const App = ({ currentUser, setUser }) => {
 
   const unsubscribeFromAuth = useRef(null);
 
@@ -45,10 +51,13 @@ const App = ({ setUser }) => {
         <Route path="/" exact component={Homepage} />
         <Route path="/hats" exact component={HatsPage} />
         <Route path="/shop" exact component={ShopPage} />
-        <Route path="/signin" exact component={SignInAndSignUpPage} />
+        <Route path="/signin" exact render={() => (currentUser) ? 
+          <Redirect to="/" /> 
+          : 
+          <SignInAndSignUpPage />} />
       </Switch>
     </div>
   );
 }
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

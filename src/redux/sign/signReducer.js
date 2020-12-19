@@ -1,4 +1,4 @@
-import { SET_SIGN_STATE } from '../constants';
+import { SET_SIGN_STATE } from '../action-types';
 
 const initialState = {
     signState: {

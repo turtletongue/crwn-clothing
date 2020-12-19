@@ -1,4 +1,4 @@
-import { SET_REGISTER_STATE } from "../constants";
+import { SET_REGISTER_STATE } from "../action-types";
 
 export const setRegisterState = (registerState) => {
     return {
