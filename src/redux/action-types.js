@@ -5,3 +5,5 @@ export const SET_SIGN_STATE = 'SET_SIGN_STATE';
 export const SET_REGISTER_STATE = 'SET_REGISTER_STATE';
 
 export const TOGGLE_CART_HIDDEN = 'TOGGLE_CART_HIDDEN';
+
+export const ADD_ITEM = 'ADD_ITEM';
