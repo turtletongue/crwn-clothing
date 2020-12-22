@@ -4,17 +4,18 @@ import Header from '../components/Header/Header';
 import Homepage from './Homepage/Homepage';
 import HatsPage from './HatsPage/HatsPage';
 import ShopPage from './ShopPage/ShopPage';
+import CheckoutPage from './CheckoutPage/CheckoutPage';
 import SignInAndSignUpPage from './SignIn-and-SignUp-Page/SignIn-and-SignUp-Page';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { auth, createUserProfileDocument } from '../firebase/firebase.utils';
 import { connect } from 'react-redux';
 import { setCurrentUser } from '../redux/user/userActions';
+import { createStructuredSelector } from 'reselect';
+import { selectCurrentUser } from '../redux/user/userSelectors';
 
-const mapStateToProps = (state) => {
-  return {
-    currentUser: state.user.currentUser
-  }
-}
+const mapStateToProps = createStructuredSelector({
+    currentUser: selectCurrentUser
+});
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -55,6 +56,7 @@ const App = ({ currentUser, setUser }) => {
           <Redirect to="/" /> 
           : 
           <SignInAndSignUpPage />} />
+        <Route path="/checkout" exact component={CheckoutPage} />
       </Switch>
     </div>
   );
