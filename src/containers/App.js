@@ -1,10 +1,10 @@
 import { useEffect, useRef } from 'react';
 import './App.css';
-import Header from '../components/Header/Header';
-import Homepage from './Homepage/Homepage';
-import ShopPage from './ShopPage/ShopPage';
-import CheckoutPage from './CheckoutPage/CheckoutPage';
-import SignInAndSignUpPage from './SignIn-and-SignUp-Page/SignIn-and-SignUp-Page';
+import Header from '../components/header/header.component.jsx';
+import Homepage from './homepage/homepage.component.jsx';
+import ShopPage from './shop-page/shop-page.component.jsx';
+import CheckoutPage from './checkout-page/checkout-page.component.jsx';
+import SignInAndSignUpPage from './sign-in-and-sign-up-page/sign-in-and-sign-up-page.component.jsx';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { auth, createUserProfileDocument } from '../firebase/firebase.utils';
 import { connect } from 'react-redux';
