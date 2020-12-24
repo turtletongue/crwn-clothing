@@ -2,7 +2,6 @@ import { useEffect, useRef } from 'react';
 import './App.css';
 import Header from '../components/Header/Header';
 import Homepage from './Homepage/Homepage';
-import HatsPage from './HatsPage/HatsPage';
 import ShopPage from './ShopPage/ShopPage';
 import CheckoutPage from './CheckoutPage/CheckoutPage';
 import SignInAndSignUpPage from './SignIn-and-SignUp-Page/SignIn-and-SignUp-Page';
@@ -50,8 +49,7 @@ const App = ({ currentUser, setUser }) => {
       <Header />
       <Switch>
         <Route path="/" exact component={Homepage} />
-        <Route path="/hats" exact component={HatsPage} />
-        <Route path="/shop" exact component={ShopPage} />
+        <Route path="/shop" component={ShopPage} />
         <Route path="/signin" exact render={() => (currentUser) ? 
           <Redirect to="/" /> 
           : 
