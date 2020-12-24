@@ -5,9 +5,9 @@ import { persistStore } from 'redux-persist';
 
 const middlewares = [];
 
-console.log(process.env.NODE_ENV);
+console.log(process.env.NODE_ENV_);
 
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV_ === 'development') {
     middlewares.push(logger);
 }
 
