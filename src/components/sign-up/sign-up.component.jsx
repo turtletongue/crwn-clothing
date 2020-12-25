@@ -1,7 +1,7 @@
-import './sign-up.styles.scss';
 import FormInput from '../form-input/form-input.component.jsx';
 import CustomButton from '../custom-button/custom-button.component.jsx';
 import { auth, createUserProfileDocument } from '../../firebase/firebase.utils';
+import { SignUpContainer, TitleContainer, ErrorContainer } from './sign-up.styles.jsx';
 
 const SignUp = ({ registerState, setRegisterState }) => {
 
@@ -37,25 +37,25 @@ const SignUp = ({ registerState, setRegisterState }) => {
     }
 
     return (
-        <div className="sign-up" onSubmit={handleSubmit}>
-            <h2 className="title">I do not have an account</h2>
+        <SignUpContainer onSubmit={handleSubmit}>
+            <TitleContainer>I do not have an account</TitleContainer>
             <span>Sign up with your email and password</span>
-            <form className="sign-up-form" onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit}>
                 <FormInput name="displayName" label="Name" type="text" value={displayName} handler={handleChange} required />
                 <FormInput name="email" label="Email" type="email" value={email} handler={handleChange} required />
                 <FormInput name="password" label="Password" type="password" value={password} handler={handleChange} required />
                 <FormInput name="confirmPassword" label="Confirm Password" type="password" value={confirmPassword} handler={handleChange} required />
-                <div className="buttons-container">
+                <div>
                     <CustomButton type="submit">SIGN UP</CustomButton>
                     {
                         (!isCorrect) ?
-                        <span className="error">Passwords do not match.</span>
+                        <ErrorContainer>Passwords do not match.</ErrorContainer>
                         :
                         <></>
                     }
                 </div>
             </form>
-        </div>
+        </SignUpContainer>
     );
 }
 

@@ -1,17 +1,17 @@
-import './form-input.styles.scss';
+import { GroupContainer, FormInputContainer, FormInputLabelContainer } from './form-input.styles.jsx';
 
 const FormInput = ({ handler, label, value, ...otherInputProps }) => {
     return (
-        <div className="group">
-            <input className="form-input" onChange={handler} value={value} {...otherInputProps} />
+        <GroupContainer>
+            <FormInputContainer onChange={handler} value={value} {...otherInputProps} />
             {
                 label ? 
-                    <label className={`${value.length ? 'shrink' : ''} form-input-label`}>
+                    <FormInputLabelContainer valueLength={value.length}>
                         { label }
-                    </label>
+                    </FormInputLabelContainer>
                     : null
             }
-        </div>
+        </GroupContainer>
         
     );
 }

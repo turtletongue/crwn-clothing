@@ -1,7 +1,7 @@
-import './sign-in.styles.scss';
 import FormInput from '../form-input/form-input.component.jsx';
 import CustomButton from '../custom-button/custom-button.component.jsx';
 import { auth, signInWithGoogle } from '../../firebase/firebase.utils';
+import { SignInContainer, TitleContainer, ButtonsContainer, SpanContainer, ErrorContainer } from './sign-in.styles.jsx';
 
 const SignIn = ({ signState, setSignState }) => {
 
@@ -29,29 +29,29 @@ const SignIn = ({ signState, setSignState }) => {
     }
 
     return (
-        <div className="sign-in" onSubmit={handleSubmit}>
-            <h2 className="title">I already have an account</h2>
+        <SignInContainer onSubmit={handleSubmit}>
+            <TitleContainer>I already have an account</TitleContainer>
             <span>Sign in with your email and password</span>
             <form onSubmit={handleSubmit}>
                 <FormInput name="email" label="Email" type="email" value={email} handler={handleChange} required />
                 <FormInput name="password" label="Password" type="password" value={password} handler={handleChange} required />
-                <div className="buttons-container">
+                <ButtonsContainer>
                     <CustomButton type="submit">Sign In</CustomButton>
                     <CustomButton onClick={signInWithGoogle} isGoogleSignIn>
                         {' '}
                         Sign in with Google{' '}
                     </CustomButton>
-                </div>
-                <div className="span-container">
+                </ButtonsContainer>
+                <SpanContainer>
                     {
                         (!isCorrect) ?
-                        <span className="error">Incorrect email or password.</span>
+                        <ErrorContainer>Incorrect email or password.</ErrorContainer>
                         :
                         <></>
                     }
-                </div>
+                </SpanContainer>
             </form>
-        </div>
+        </SignInContainer>
     );
 }
 
