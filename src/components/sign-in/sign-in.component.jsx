@@ -1,31 +1,36 @@
 import FormInput from '../form-input/form-input.component.jsx';
 import CustomButton from '../custom-button/custom-button.component.jsx';
-import { auth, signInWithGoogle } from '../../firebase/firebase.utils';
 import { SignInContainer, TitleContainer, ButtonsContainer, SpanContainer, ErrorContainer } from './sign-in.styles.jsx';
+import { googleSignInStart, emailSignInStart } from '../../redux/user/userActions.js';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import { selectSignInEmail, selectSignInIsCorrect, selectSignInPassword } from '../../redux/sign/signSelectors.js';
+import { setSignInFormData } from '../../redux/sign/signActions.js';
 
-const SignIn = ({ signState, setSignState }) => {
+const mapStateToProps = createStructuredSelector({
+    email: selectSignInEmail,
+    password: selectSignInPassword,
+    isCorrect: selectSignInIsCorrect
+});
 
-    const { email, password, isCorrect } = signState;
+const mapDispatchToProps = dispatch => {
+    return {
+        googleSignInStart: () => dispatch(googleSignInStart()),
+        emailSignInStart: (email, password) => dispatch(emailSignInStart({ email, password })),
+        setFormData: (name, value) => dispatch(setSignInFormData(name, value))
+    };
+}
 
-    const handleSubmit = async (event) => {
+const SignIn = ({ email, password, isCorrect, setFormData, googleSignInStart, emailSignInStart }) => {
+
+    const handleSubmit = (event) => {
         event.preventDefault();
-
-        try {
-            await auth.signInWithEmailAndPassword(email, password);
-            setSignState({
-                email: '',
-                password: '',
-                isCorrect: true
-            });
-        } catch (error) {
-            setSignState({ ...signState, isCorrect: false });
-            console.log(error);
-        }
+        emailSignInStart(email, password);
     }
 
     const handleChange = (event) => {
-        const { value, name } = event.target;
-        setSignState({ ...signState, [name]: value });
+        const { name, value } = event.target;
+        setFormData(name, value);
     }
 
     return (
@@ -37,7 +42,7 @@ const SignIn = ({ signState, setSignState }) => {
                 <FormInput name="password" label="Password" type="password" value={password} handler={handleChange} required />
                 <ButtonsContainer>
                     <CustomButton type="submit">Sign In</CustomButton>
-                    <CustomButton onClick={signInWithGoogle} isGoogleSignIn>
+                    <CustomButton type='button' onClick={googleSignInStart} isGoogleSignIn>
                         {' '}
                         Sign in with Google{' '}
                     </CustomButton>
@@ -55,4 +60,4 @@ const SignIn = ({ signState, setSignState }) => {
     );
 }
 
-export default SignIn;
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn);

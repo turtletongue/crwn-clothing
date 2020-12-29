@@ -1,39 +1,51 @@
 import FormInput from '../form-input/form-input.component.jsx';
 import CustomButton from '../custom-button/custom-button.component.jsx';
-import { auth, createUserProfileDocument } from '../../firebase/firebase.utils';
-import { SignUpContainer, TitleContainer, ErrorContainer } from './sign-up.styles.jsx';
+import { SignUpContainer, TitleContainer, ErrorContainer, ButtonsContainer } from './sign-up.styles.jsx';
+import { signUpStart } from '../../redux/user/userActions.js';
+import { connect } from 'react-redux';
+import { setIsCorrect, setIsWrong, setRegisterFormData } from '../../redux/register/registerActions.js';
+import { createStructuredSelector } from 'reselect';
+import { selectRegisterEmail,
+         selectRegisterPassword,
+         selectRegisterDisplayName,
+         selectRegisterConfirmPassword,
+         selectRegisterIsCorrect
+} from '../../redux/register/registerSelectors.js';
 
-const SignUp = ({ registerState, setRegisterState }) => {
+const mapStateToProps = createStructuredSelector({
+    email: selectRegisterEmail,
+    password: selectRegisterPassword,
+    confirmPassword: selectRegisterConfirmPassword,
+    displayName: selectRegisterDisplayName,
+    isCorrect: selectRegisterIsCorrect
+});
 
-    const { displayName, email, password, confirmPassword, isCorrect } = registerState;
+const mapDispatchToProps = dispatch => {
+    return {
+        signUp: (email, password, displayName) => dispatch(signUpStart(email, password, displayName)),
+        setIsWrong: () => dispatch(setIsWrong()),
+        setIsCorrect: () => dispatch(setIsCorrect()),
+        setFormData: (name, value) => dispatch(setRegisterFormData(name, value))
+    };
+}
 
-    const handleSubmit = async (event) => {
+const SignUp = ({ email, password, displayName, isCorrect, confirmPassword, signUp, setIsWrong, setIsCorrect, setFormData }) => {
+
+    const handleSubmit = (event) => {
         event.preventDefault();
 
         if (password !== confirmPassword) {
-            setRegisterState({ ...registerState, isCorrect: false });
+            setIsWrong();
             return;
         }
 
-        try {
-            const { user } = await auth.createUserWithEmailAndPassword(email, password);
-            createUserProfileDocument(user, { displayName });
-    
-            setRegisterState({
-                displayName: '',
-                email: '',
-                password: '',
-                confirmPassword: '',
-                isCorrect: true
-            });
-        } catch (error) {
-            console.log(error);
-        }
+        setIsCorrect();
+        signUp(email, password, displayName);
     }
 
     const handleChange = (event) => {
-        const { value, name } = event.target;
-        setRegisterState({ ...registerState, [name]: value });
+        const { name, value } = event.target;
+        setFormData(name, value);
     }
 
     return (
@@ -45,7 +57,7 @@ const SignUp = ({ registerState, setRegisterState }) => {
                 <FormInput name="email" label="Email" type="email" value={email} handler={handleChange} required />
                 <FormInput name="password" label="Password" type="password" value={password} handler={handleChange} required />
                 <FormInput name="confirmPassword" label="Confirm Password" type="password" value={confirmPassword} handler={handleChange} required />
-                <div>
+                <ButtonsContainer>
                     <CustomButton type="submit">SIGN UP</CustomButton>
                     {
                         (!isCorrect) ?
@@ -53,10 +65,10 @@ const SignUp = ({ registerState, setRegisterState }) => {
                         :
                         <></>
                     }
-                </div>
+                </ButtonsContainer>
             </form>
         </SignUpContainer>
     );
 }
 
-export default SignUp;
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);

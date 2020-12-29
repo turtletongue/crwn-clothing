@@ -1,8 +1,22 @@
-import { UPDATE_COLLECTIONS } from "../action-types";
+import { FETCH_COLLECTIONS_FAILURE, FETCH_COLLECTIONS_START, FETCH_COLLECTIONS_SUCCESS } from "../action-types";
+import { firestore, converCollectionsSnapshotToMap } from '../../firebase/firebase.utils';
 
-export const updateCollections = collectuionsMap => {
+export const fetchCollectionsStart = () => {
     return {
-        type: UPDATE_COLLECTIONS,
-        payload: collectuionsMap
+        type: FETCH_COLLECTIONS_START,
+    };
+}
+
+export const fetchCollectionsSuccess = collectionsMap => {
+    return {
+        type: FETCH_COLLECTIONS_SUCCESS,
+        payload: collectionsMap
+    };
+}
+
+export const fetchCollectionsFailure = errorMessage => {
+    return {
+        type: FETCH_COLLECTIONS_FAILURE,
+        payload: errorMessage
     };
 }

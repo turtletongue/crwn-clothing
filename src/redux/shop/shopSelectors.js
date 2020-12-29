@@ -16,3 +16,8 @@ export const selectCollectionForPreview = createSelector(
     [selectShopCollections],
     collections => collections ? Object.values(collections) : []
 );
+
+export const selectCollectionsLoading = createSelector(
+    [selectShop],
+    shop => !(!!shop.collections)
+);

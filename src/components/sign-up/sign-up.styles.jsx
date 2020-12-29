@@ -15,3 +15,8 @@ export const ErrorContainer = styled.span`
     margin: 5px;
     text-align: center;
 `;
+
+export const ButtonsContainer = styled.div`
+    display: flex;
+    justify-content: space-between
+`;
