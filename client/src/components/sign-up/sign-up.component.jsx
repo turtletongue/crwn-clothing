@@ -6,10 +6,10 @@ import { connect } from 'react-redux';
 import { setIsCorrect, setIsWrong, setRegisterFormData } from '../../redux/register/registerActions.js';
 import { createStructuredSelector } from 'reselect';
 import { selectRegisterEmail,
-         selectRegisterPassword,
-         selectRegisterDisplayName,
-         selectRegisterConfirmPassword,
-         selectRegisterIsCorrect
+        selectRegisterPassword,
+        selectRegisterDisplayName,
+        selectRegisterConfirmPassword,
+        selectRegisterIsCorrect
 } from '../../redux/register/registerSelectors.js';
 
 const mapStateToProps = createStructuredSelector({

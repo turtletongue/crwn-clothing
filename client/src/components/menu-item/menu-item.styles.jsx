@@ -59,11 +59,10 @@ export const SubtitleContainer = styled.span`
 `;
 
 export const BackgroundImageContainer = styled.div`
-    transition: 6s all;
     width: 100%;
     height: 100%;
 
     &:hover {
-        transform: scale(1.05);
+        opacity: 0.95;
     }
 `;
