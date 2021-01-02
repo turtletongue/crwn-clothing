@@ -7,39 +7,51 @@ import { selectCurrentUser } from '../../redux/user/userSelectors';
 import { createStructuredSelector } from 'reselect';
 import { HeaderContainer, LogoContainer, OptionsContainer, OptionLink } from './header.styles.jsx';
 import { signOutStart } from '../../redux/user/userActions';
+import { Alert } from 'react-bootstrap';
+import { selectAlertHidden, selectAlertTheme, selectAlertText } from '../../redux/alert/alertSelectors';
+import { closeAlert } from '../../redux/alert/alertActions';
 
 const mapStateToProps = createStructuredSelector({
     currentUser: selectCurrentUser,
-    hidden: selectCartHidden
+    cartHidden: selectCartHidden,
+    alertHidden: selectAlertHidden,
+    alertTheme: selectAlertTheme,
+    alertText: selectAlertText
 })
 
 const mapDispatchToProps = dispatch => {
     return {
-        signOut: () => dispatch(signOutStart())
+        signOut: () => dispatch(signOutStart()),
+        dismissAlert: () => dispatch(closeAlert())
     };
 }
 
-const Header = ({ currentUser, hidden, signOut }) => {
+const Header = ({ currentUser, cartHidden, alertHidden, alertTheme, alertText, dismissAlert, signOut }) => {
     return (
-        <HeaderContainer>
-            <LogoContainer to="/">
-                <Logo className="logo" />
-            </LogoContainer>
-            <OptionsContainer>
-                <OptionLink to="/shop">SHOP</OptionLink>
-                <OptionLink to="/contact">CONTACT</OptionLink>
+        <div>
+            <HeaderContainer>
+                <LogoContainer to="/">
+                    <Logo className="logo" />
+                </LogoContainer>
+                <OptionsContainer>
+                    <OptionLink to="/shop">SHOP</OptionLink>
+                    <OptionLink to="/contact">CONTACT</OptionLink>
+                    {
+                        (currentUser) ?
+                            <OptionLink as='div' onClick={() => signOut()}>SIGN OUT</OptionLink>
+                            :
+                            <OptionLink className="option" to="/signin">SIGN IN</OptionLink>
+                    }
+                    <CartIcon />
+                </OptionsContainer>
                 {
-                    (currentUser) ?
-                        <OptionLink as='div' onClick={() => signOut()}>SIGN OUT</OptionLink>
-                        :
-                        <OptionLink className="option" to="/signin">SIGN IN</OptionLink>
+                    (!cartHidden) ? <CartDropdown /> : null
                 }
-                <CartIcon />
-            </OptionsContainer>
-            {
-                (!hidden) ? <CartDropdown /> : null
-            }
-        </HeaderContainer>
+            </HeaderContainer>
+            <Alert variant={alertTheme} show={!alertHidden} onClose={ () => dismissAlert() } dismissible>
+                { alertText }
+            </Alert>
+        </div>
     );
 }
 

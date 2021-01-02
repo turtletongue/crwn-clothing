@@ -3,14 +3,17 @@ import { StripeCheckoutContainer } from './stripe-button.styles.jsx';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { clearCart } from '../../redux/cart/cartActions';
+import { showAlert, setAlertText } from '../../redux/alert/alertActions';
 
 const mapDispatchToProps = dispatch => {
     return {
-        clearCartAfterPayment: () => dispatch(clearCart())
+        clearCartAfterPayment: () => dispatch(clearCart()),
+        showAlertAfterPayment: theme => dispatch(showAlert(theme)),
+        setAlertMessage: text => dispatch(setAlertText(text))
     };
 }
 
-const StripeButton = ({ price, history, clearCartAfterPayment }) => {
+const StripeButton = ({ price, history, clearCartAfterPayment, showAlertAfterPayment, setAlertMessage }) => {
     const priceForStripe = price * 100;
     const publishableKey = 'pk_test_51I1stlJeVfJJ7K9IfCyNNgvQ8j3tmjJrcFZZLYpwaIIy3ST8Fbw6B9GIMJpfuzyXUY2iwU4DNnn424XcBFKUhkZ0003GYx4lrA';
     
@@ -24,12 +27,14 @@ const StripeButton = ({ price, history, clearCartAfterPayment }) => {
             }
         })
             .then(response => {
-                alert('Payment successful');
                 clearCartAfterPayment();
+                setAlertMessage('Payment successful');
+                showAlertAfterPayment('success');
             })
             .catch(error => {
                 console.log(`Payment error: ${JSON.parse(error)}`);
-                alert('There was an issue with your payment. Please sure you use the provided credit card.');
+                setAlertMessage('There was an issue with your payment. Please sure you use the provided credit card.');
+                showAlertAfterPayment('danger');
             });
         history.push('/');
     }

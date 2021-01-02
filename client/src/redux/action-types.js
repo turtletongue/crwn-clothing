@@ -49,3 +49,9 @@ export const SET_SIGN_IN_IS_WRONG = 'SET_SIGN_IN_IS_WRONG';
 export const SET_SIGN_IN_IS_CORRECT = 'SET_SIGN_IN_IS_CORRECT';
 
 export const CHANGE_SIGN_IN_FORM_DATA = 'CHANGE_SIGN_IN_FORM_DATA';
+
+export const SHOW_ALERT = 'SHOW_ALERT';
+
+export const CLOSE_ALERT = 'CLOSE_ALERT';
+
+export const SET_ALERT_TEXT = 'SET_ALERT_TEXT';
