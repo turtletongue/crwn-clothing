@@ -1,8 +1,16 @@
 import { withRouter } from 'react-router-dom';
 import { StripeCheckoutContainer } from './stripe-button.styles.jsx';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import { clearCart } from '../../redux/cart/cartActions';
 
-const StripeButton = ({ price, history }) => {
+const mapDispatchToProps = dispatch => {
+    return {
+        clearCartAfterPayment: () => dispatch(clearCart())
+    };
+}
+
+const StripeButton = ({ price, history, clearCartAfterPayment }) => {
     const priceForStripe = price * 100;
     const publishableKey = 'pk_test_51I1stlJeVfJJ7K9IfCyNNgvQ8j3tmjJrcFZZLYpwaIIy3ST8Fbw6B9GIMJpfuzyXUY2iwU4DNnn424XcBFKUhkZ0003GYx4lrA';
     
@@ -17,6 +25,7 @@ const StripeButton = ({ price, history }) => {
         })
             .then(response => {
                 alert('Payment successful');
+                clearCartAfterPayment();
             })
             .catch(error => {
                 console.log(`Payment error: ${JSON.parse(error)}`);
@@ -41,4 +50,4 @@ const StripeButton = ({ price, history }) => {
     );
 }
 
-export default withRouter(StripeButton);
+export default connect(null, mapDispatchToProps)(withRouter(StripeButton));
