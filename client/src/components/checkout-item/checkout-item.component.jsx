@@ -1,14 +1,14 @@
 import { addToCart, clearFromCart, removeFromCart } from '../../redux/cart/cartActions';
 import { connect } from 'react-redux';
 import { CheckoutItemContainer, 
-         ImageContainer, 
-         StyledImage, 
-         NameContainer, 
-         QuantityContainer, 
-         ArrowContainer, 
-         ValueContainer, 
-         PriceContainer,
-         RemoveButtonContainer } from './checkout-item.styles.jsx';
+        ImageContainer, 
+        StyledImage, 
+        NameContainer, 
+        QuantityContainer, 
+        ArrowContainer, 
+        ValueContainer, 
+        PriceContainer,
+        RemoveButtonContainer } from './checkout-item.styles.jsx';
 
 const mapDispatchToProps = dispatch => {
     return {
