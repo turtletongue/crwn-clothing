@@ -4,6 +4,12 @@ export const SignInContainer = styled.div`
     width: 380px;
     display: flex;
     flex-direction: column;
+
+    @media screen and (max-width: 800px) {
+        width: 100%;
+        display: block;
+        padding: 10px;
+    }
 `;
 
 export const TitleContainer = styled.h2`
@@ -13,6 +19,10 @@ export const TitleContainer = styled.h2`
 export const ButtonsContainer = styled.div`
     display: flex;
     justify-content: space-between;
+
+    @media screen and (max-width: 800px) {
+        display: block;
+    }
 `;
 
 export const SpanContainer = styled.div`

@@ -1,11 +1,11 @@
 import { addToCart } from '../../redux/cart/cartActions';
 import { connect } from 'react-redux';
 import { CollectionItemContainer, 
-         ImageContainer, 
-         CollectionFooterContainer, 
-         NameContainer, 
-         PriceContainer,
-         CustomButtonContainer } from './collection-item.styles.jsx';
+        ImageContainer, 
+        CollectionFooterContainer, 
+        NameContainer, 
+        PriceContainer,
+        CustomButtonContainer } from './collection-item.styles.jsx';
 
 const mapDispatchToProps = (dispatch) => {
     return {

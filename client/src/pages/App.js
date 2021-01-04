@@ -1,4 +1,4 @@
-import './App.css';
+import { GlobalStyle } from '../global.styles';
 import Header from '../components/header/header.component.jsx';
 import Homepage from './homepage/homepage.component.jsx';
 import ShopPage from './shop-page/shop-page.component.jsx';
@@ -28,6 +28,7 @@ const App = ({ currentUser, checkUserSession }) => {
 
   return (
     <div className="App">
+      <GlobalStyle />
       <Header />
       <Switch>
         <Route path="/" exact component={Homepage} />

@@ -2,6 +2,11 @@ import styled, { css } from 'styled-components';
 
 const DataStyles = css`
     width: 23%;
+
+    @media screen and (max-width: 800px) {
+        width: 30%;
+        font-size: 1rem;
+    }
 `;
 
 export const CheckoutItemContainer = styled.div`
@@ -12,11 +17,20 @@ export const CheckoutItemContainer = styled.div`
     padding: 15px 0;
     font-size: 20px;
     align-items: center;
+
+    @media screen and (max-width: 800px) {
+        min-height: 150px;
+    }
 `;
 
 export const ImageContainer = styled.div`
     width: 23%;
     padding-right: 15px;
+
+    @media screen and (max-width: 800px) {
+        width: 35%;
+        padding-right: 5px;
+    }
 `;
 
 export const StyledImage = styled.img`
@@ -48,6 +62,10 @@ export const ValueContainer = styled.span`
 export const RemoveButtonContainer = styled.div`
     padding-left: 12px;
     cursor: pointer;
+
+    @media screen and (max-width: 800px) {
+        padding-left: 0;
+    }
 `;
 
 
