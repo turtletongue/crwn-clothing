@@ -1,3 +1,4 @@
+import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { StripeCheckoutContainer } from './stripe-button.styles.jsx';
 import axios from 'axios';

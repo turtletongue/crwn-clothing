@@ -1,3 +1,4 @@
+import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { MenuItemContainer, BackgroundImageContainer, ContentContainer, TitleContainer, SubtitleContainer } from './menu-item.styles.jsx';
 

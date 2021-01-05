@@ -1,3 +1,4 @@
+import React from 'react';
 import { addToCart, clearFromCart, removeFromCart } from '../../redux/cart/cartActions';
 import { connect } from 'react-redux';
 import { CheckoutItemContainer, 

@@ -1,3 +1,4 @@
+import React from 'react';
 import CartItem from '../cart-item/cart-item.component.jsx';
 import { connect } from 'react-redux';
 import { selectCartItems } from '../../redux/cart/cartSelectors';

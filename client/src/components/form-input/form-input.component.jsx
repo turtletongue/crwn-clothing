@@ -1,3 +1,4 @@
+import React from 'react';
 import { GroupContainer, FormInputContainer, FormInputLabelContainer } from './form-input.styles.jsx';
 
 const FormInput = ({ handler, label, value, ...otherInputProps }) => {

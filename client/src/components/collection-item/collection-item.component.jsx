@@ -1,3 +1,4 @@
+import React from 'react';
 import { addToCart } from '../../redux/cart/cartActions';
 import { connect } from 'react-redux';
 import { CollectionItemContainer, 

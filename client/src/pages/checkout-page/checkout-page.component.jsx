@@ -1,13 +1,14 @@
+import React from 'react';
 import { connect } from 'react-redux';
 import { selectCartItems, selectCartTotal } from '../../redux/cart/cartSelectors';
 import { createStructuredSelector } from 'reselect';
 import CheckoutItem from '../../components/checkout-item/checkout-item.component.jsx';
 import StripeButton from '../../components/stripe-button/stripe-button.component.jsx';
 import { CheckoutPageContainer, 
-         CheckoutHeaderContainer, 
-         HeaderBlockContainer, 
-         TotalContainer, 
-         TestWarningContainer } from './checkout-page.styles.jsx';
+        CheckoutHeaderContainer, 
+        HeaderBlockContainer, 
+        TotalContainer, 
+        TestWarningContainer } from './checkout-page.styles.jsx';
 
 const mapStateToProps = createStructuredSelector({
     cartItems: selectCartItems,

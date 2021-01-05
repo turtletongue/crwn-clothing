@@ -1,3 +1,4 @@
+import React from 'react';
 import { connect } from 'react-redux';
 import { selectCollection } from '../../redux/shop/shopSelectors';
 import CollectionItem from '../../components/collection-item/collection-item.component.jsx';

@@ -1,3 +1,4 @@
+import React from 'react';
 import FormInput from '../form-input/form-input.component.jsx';
 import CustomButton from '../custom-button/custom-button.component.jsx';
 import { SignInContainer, TitleContainer, ButtonsContainer, SpanContainer, ErrorContainer } from './sign-in.styles.jsx';
