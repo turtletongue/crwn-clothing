@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from 'react';
+import { lazy, Suspense } from 'react';
 import { GlobalStyle } from '../global.styles';
 import Header from '../components/header/header.component.jsx';
 import { Switch, Route, Redirect } from 'react-router-dom';

@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from 'react';
+import { lazy, Suspense } from 'react';
 import { Route } from 'react-router-dom';
 import { useEffect } from 'react';
 import { connect } from 'react-redux';
