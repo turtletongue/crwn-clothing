@@ -1,4 +1,3 @@
-import React from 'react';
 import CollectionItem from '../collection-item/collection-item.component.jsx';
 import { Link, withRouter } from 'react-router-dom';
 import { CollectionPreviewContainer, TitleContainer, PreviewContainer } from './collection-preview.styles.jsx';
