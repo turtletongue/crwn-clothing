@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "CRWN CLT",
+  "name": "Crowm Clothing",
   "icons": [
     {
       "src": "favicon.ico",
@@ -9,7 +9,7 @@
     },
     {
       "src": "maskable_icon_x1.png",
-      "sizes": "196x196 512x512",
+      "sizes": "192x192 512x512",
       "type": "image/png",
       "purpose": "maskable"
     }
