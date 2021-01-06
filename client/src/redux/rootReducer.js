@@ -12,7 +12,7 @@ import alertReducer from './alert/alertReducer';
 const persistConfig = {
     key: 'root',
     storage,
-    whitelist: ['cart']
+    whitelist: []
 };
 
 

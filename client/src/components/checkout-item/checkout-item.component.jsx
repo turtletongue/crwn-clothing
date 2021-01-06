@@ -1,4 +1,4 @@
-import { addToCart, clearFromCart, removeFromCart } from '../../redux/cart/cartActions';
+import { addToCartStart, clearFromCartStart, removeFromCartStart } from '../../redux/cart/cartActions';
 import { connect } from 'react-redux';
 import { CheckoutItemContainer, 
         ImageContainer, 
@@ -12,9 +12,9 @@ import { CheckoutItemContainer,
 
 const mapDispatchToProps = dispatch => {
     return {
-        clearCartItem: item => dispatch(clearFromCart(item)),
-        addItemToCart: item => dispatch(addToCart(item)),
-        removeItemFromCart: item => dispatch(removeFromCart(item))
+        clearCartItem: item => dispatch(clearFromCartStart(item)),
+        addItemToCart: item => dispatch(addToCartStart(item)),
+        removeItemFromCart: item => dispatch(removeFromCartStart(item))
     };
 }
 

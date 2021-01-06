@@ -7,9 +7,9 @@ import { selectCurrentUser } from '../../redux/user/userSelectors';
 import { createStructuredSelector } from 'reselect';
 import { HeaderContainer, LogoContainer, OptionsContainer, OptionLink } from './header.styles.jsx';
 import { signOutStart } from '../../redux/user/userActions';
-import { Alert } from 'react-bootstrap';
 import { selectAlertHidden, selectAlertTheme, selectAlertText } from '../../redux/alert/alertSelectors';
 import { closeAlert } from '../../redux/alert/alertActions';
+import { Alert } from 'react-bootstrap';
 
 const mapStateToProps = createStructuredSelector({
     currentUser: selectCurrentUser,

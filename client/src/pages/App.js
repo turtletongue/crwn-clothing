@@ -1,11 +1,12 @@
 import { lazy, Suspense } from 'react';
 import { GlobalStyle } from '../global.styles';
-import Header from '../components/header/header.component.jsx';
+import Header from '../components/header/header.component';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser } from '../redux/user/userSelectors';
 import { checkUserSession } from '../redux/user/userActions';
+import { fetchCartItemsStart } from '../redux/cart/cartActions';
 import { useEffect } from 'react';
 import Spinner from '../components/spinner/spinner.component';
 import ErrorBoundary from '../components/error-boundary/error-boundary.component';
@@ -21,15 +22,17 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = dispatch => {
   return {
-    checkUserSession: () => dispatch(checkUserSession()) 
+    checkUserSession: () => dispatch(checkUserSession()) ,
+    fetchCartItems: () => dispatch(fetchCartItemsStart())
   };
 }
 
-const App = ({ currentUser, checkUserSession }) => {
+const App = ({ currentUser, checkUserSession, fetchCartItems }) => {
 
   useEffect(() => {
     checkUserSession();
-  }, [checkUserSession]);
+    fetchCartItems();
+  }, [checkUserSession, fetchCartItems]);
 
   return (
     <div className="App">

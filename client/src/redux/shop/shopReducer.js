@@ -11,7 +11,7 @@ const shopReducer = (state=initialState, action={}) => {
         case FETCH_COLLECTIONS_START:
             return { ...state, isFetching: true };
         case FETCH_COLLECTIONS_SUCCESS:
-          return { ...state, collections: action.payload, isFetching: false };
+            return { ...state, collections: action.payload, isFetching: false };
         case FETCH_COLLECTIONS_FAILURE:
             return { ...state, isFetching: false, errorMessage: action.payload };
         default:

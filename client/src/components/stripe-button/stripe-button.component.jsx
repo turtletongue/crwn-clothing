@@ -2,12 +2,12 @@ import { withRouter } from 'react-router-dom';
 import { StripeCheckoutContainer } from './stripe-button.styles.jsx';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { clearCart } from '../../redux/cart/cartActions';
+import { clearCartStart } from '../../redux/cart/cartActions';
 import { showAlert, setAlertText } from '../../redux/alert/alertActions';
 
 const mapDispatchToProps = dispatch => {
     return {
-        clearCartAfterPayment: () => dispatch(clearCart()),
+        clearCartAfterPayment: () => dispatch(clearCartStart()),
         showAlertAfterPayment: theme => dispatch(showAlert(theme)),
         setAlertMessage: text => dispatch(setAlertText(text))
     };
@@ -32,7 +32,7 @@ const StripeButton = ({ price, history, clearCartAfterPayment, showAlertAfterPay
                 showAlertAfterPayment('success');
             })
             .catch(error => {
-                console.log(`Payment error: ${JSON.parse(error)}`);
+                console.log(`Payment error: ${error}`);
                 setAlertMessage('There was an issue with your payment. Please sure you use the provided credit card.');
                 showAlertAfterPayment('danger');
             });

@@ -1,4 +1,4 @@
-import { addToCart } from '../../redux/cart/cartActions';
+import { addToCartStart } from '../../redux/cart/cartActions';
 import { connect } from 'react-redux';
 import { CollectionItemContainer, 
         ImageContainer, 
@@ -9,7 +9,7 @@ import { CollectionItemContainer,
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addItemToCart: ((item) => dispatch(addToCart(item)))
+        addItemToCart: ((item) => dispatch(addToCartStart(item)))
     };
 }
 

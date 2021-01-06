@@ -2,11 +2,13 @@ import { takeLatest, put, all, call } from 'redux-saga/effects';
 import { CHECK_USER_SESSION, EMAIL_SIGN_IN_START, GOOGLE_SIGN_IN_START, SIGN_OUT_START, SIGN_UP_START } from '../action-types';
 import { auth, googleProvider, createUserProfileDocument, getCurrentUser } from '../../firebase/firebase.utils';
 import { signInFailure, signInSuccess, signOutSuccess, signOutFailure, signUpFailure, signUpSuccess } from './userActions';
+import { clearCartStart, fetchCartItemsStart } from '../../redux/cart/cartActions';
 
 export function* getSnapshotFromUserAuth(userAuth) {
     try {
         const userRef = yield call(createUserProfileDocument, userAuth);
         const userSnapshot = yield userRef.get();
+        yield put(fetchCartItemsStart());
         yield put(signInSuccess({ id: userSnapshot.id, ...userSnapshot.data() }));
     } catch(error) {
         yield put(signInFailure(error));
@@ -55,6 +57,7 @@ export function* onCheckUserSession() {
 
 export function* signOut() {
     try {
+        yield put(clearCartStart());
         yield auth.signOut();
         yield put(signOutSuccess());
     } catch(error) {
